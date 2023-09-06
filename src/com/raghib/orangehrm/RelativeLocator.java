@@ -1,7 +1,11 @@
-package com.raghib.amazon;
+package com.raghib.orangehrm;
+
+//import org.openqa.selenium.support.locators.RelativeLocator;
+import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 /**
  * REFERENCES:-
+ * https://www.youtube.com/watch?v=er7gX8naE8I
  * https://www.youtube.com/watch?v=k2tHh3mYaJg&t=605s
  */
 
@@ -10,8 +14,6 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.support.locators.RelativeLocator;
-import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 import com.raghib.selenium.BaseClass;
 import com.raghib.selenium.WaitClass;
@@ -42,17 +44,22 @@ public class RelativeLocator extends BaseClass {
 		
 		driver.findElement(
 				with(
-						By.xpath("//button[@type='submit']")
+						By.tagName("button")
 					).below(password)
 				).click();
 		
-//		WebElement loginButton = driver.findElement(
-//				with(
-//						By.xpath("//button[@type='submit']")
-//					).below(password)
-//				);		
-//		loginButton.click();
+		WebElement dropdownElement = driver.findElement(By.xpath("//p[@class='oxd-userdropdown-name']"));
+		dropdownElement.click();
+		
+		WebElement changePasswordElement = driver.findElement(By.xpath("//a[text()='Change Password']"));
+		
+		WebElement logoutButton = driver.findElement(
+				with(
+						By.tagName("a")
+					).below(changePasswordElement)
+				);		
+		logoutButton.click();
 
-		//BaseClass.quitDriver();
+		BaseClass.quitDriver();
 	}
 }
